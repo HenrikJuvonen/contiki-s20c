@@ -7,18 +7,18 @@ Author: Henrik Juvonen <heolju@gmail.com>
 
 Before you can build the examples in this directory, you need to have three things ready:
 
-1. Cimsys Developer installed and IM3910-M210 v1.4.4 Profile installed
+### Cimsys Developer installed and IM3910-M210 v1.4.4 Profile installed
 
 Expected locations:
 
 - `C:\Program Files (x86)\Cimsys\Cimsys Developer`
 - `C:\Program Files (x86)\Imsys Technologies\Profiles\IM3910-M210 v1.4.4`
 
-2. Unix utils in your path
+### Unix utils included in your path
 
 You also need to have win32 ports of unix utils such as make, sed, and sh. You may get these from various sources such as `ezwinports`, `gnuwin32`, `unxutils`, `msys-coreutils` and perhaps even `cygwin`. You will be notified of the missing files during the build process if you are missing files. Remember to put the binary path in your PATH environment variable.
 
-3. Compiler interface built
+### Compiler interface built
 
 This can be found in `tools\s20c\`. Follow the instructions in `README.md` of that directory. In the end you should have `cc.exe` file in there.
 
