@@ -1,0 +1,25 @@
+CC2 = $(CONTIKI)/tools/$(TARGET)/cc
+CONTIKI_SOURCEFILES += symbols.c
+RELSTR = 3
+
+CLEAN = *.gpx *.map *.prj *.idpd *.idpw
+
+CUSTOM_RULE_C_TO_OBJECTDIR_O = 1
+$(OBJECTDIR)/%.o: %.c | $(OBJECTDIR)
+	@:
+
+CUSTOM_RULE_C_TO_O = 1
+%.co: %.c
+	@:
+
+CUSTOM_RULE_C_TO_CO = 1
+%.co: %.c
+	@:
+
+CUSTOM_RULE_LINK = 1
+%.$(TARGET): %.co $(PROJECT_OBJECTFILES) $(PROJECT_LIBRARIES) contiki-$(TARGET).a
+	$(Q)$(CC2) -n $(shell echo $@ |sed 's/.$(TARGET)//g') -i $(SOURCEDIRS) -f $(CONTIKI_SOURCEFILES) $(shell echo $@ |sed 's/.$(TARGET)/.c/g') -o $(OBJECTDIR) -r $(CONTIKI) -d "$(shell echo '$(CFLAGS)' |sed 's/-I[^[:space:]]*\s//g' |sed 's/-D//g' |sed 's/  \+/ /g')"
+
+CUSTOM_RULE_ALLOBJS_TO_TARGETLIB = 1
+contiki-$(TARGET).a: $(CONTIKI_OBJECTFILES)
+	@:

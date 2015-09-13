@@ -1,0 +1,13 @@
+CONTIKI_CPU_DIRS = . dev
+
+CONTIKI_SOURCEFILES += elfloader-stub.c
+CONTIKI_SOURCEFILES += mtarch.c rtimer-arch.c watchdog.c
+CONTIKI_SOURCEFILES += eeprom.c clock.c fc3180-rtc.c fc3180-uart.c spi-arch.c
+
+### Compilation rules
+
+symbols.c symbols.h:
+	cp ${CONTIKI}/tools/empty-symbols.c symbols.c
+	cp ${CONTIKI}/tools/empty-symbols.h symbols.h
+
+contiki-$(TARGET).a: ${addprefix $(OBJECTDIR)/,symbols.o}

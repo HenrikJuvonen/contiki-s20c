@@ -1,0 +1,29 @@
+ifndef CONTIKI
+  $(error CONTIKI not defined! You must specify where CONTIKI resides!)
+endif
+
+CFLAGS += -DAUTOSTART_ENABLE=1
+
+CONTIKI_TARGET_DIRS = . dev dev/cc2520 dev/dht22 dev/hcsr04 dev/relay
+CONTIKI_TARGET_MAIN = ${addprefix $(OBJECTDIR)/,contiki-main.o}
+
+CONTIKI_TARGET_SOURCEFILES = \
+	contiki-main.c \
+	cc2520.c cc2520-arch.c \
+  leds-arch.c slip-arch.c \
+	dht22-sensor.c dht22.c \
+	hcsr04-sensor.c hcsr04.c \
+	relay.c
+
+CONTIKI_SOURCEFILES += $(CONTIKI_TARGET_SOURCEFILES)
+
+.SUFFIXES:
+
+### Define the CPU directory
+CONTIKI_CPU=$(CONTIKI)/cpu/fc3180
+include $(CONTIKI)/cpu/fc3180/Makefile.fc3180
+
+MODULES += core/net core/net/mac \
+           core/net/mac/contikimac \
+           core/net/ip core/net/ipv6 \
+           core/net/llsec
